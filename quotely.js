@@ -55,6 +55,7 @@ async function createWidget() {
   return widget;
 }
 
+//archived
 function hashString(str) {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
@@ -62,6 +63,20 @@ function hashString(str) {
     hash |= 0; // Convert to 32bit integer
   }
   return Math.abs(hash);
+}
+
+function cyrb53(str) {
+  let h1 = 0xdeadbeef ^ str.length, h2 = 0x41c6ce57 ^ str.length;
+  for (let i = 0, ch; i < str.length; i++) {
+    ch = str.charCodeAt(i);
+    h1 = Math.imul(h1 ^ ch, 2654435761);
+    h2 = Math.imul(h2 ^ ch, 1597334677);
+  }
+  h1  = Math.imul(h1 ^ (h1 >>> 16), 2246822507);
+  h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  h2  = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
+  h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  return (h2 >>> 0) * 4294967296 + (h1 >>> 0);
 }
 
 async function loadQuotes() {
