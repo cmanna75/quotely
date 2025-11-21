@@ -28,8 +28,11 @@ async function createWidget() {
   }
 
   // Pick a quote using date hash
-  let dateHash = hashString(new Date().toDateString());
-  let quote = quotes[dateHash % quotes.length];
+  let now = new Date();
+  let dateKey = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}-${now.getDay()}`;
+  let dateHash = cyrb53(dateKey);  // uses better hash
+  let index = Math.floor(dateHash % 1e12 / 1e12 * quotes.length);
+  let quote = quotes[index];
 
   // Format quote
   const quoteText = widget.addText(`"${quote.quote}"`);
