@@ -2,7 +2,7 @@
 // Displays a daily random quote based on a hash of the date
 
 // CONFIGURATION
-const GIST_URL = "https://gist.githubusercontent.com/cmanna75/bb90b547698fcd9818913170f801f020/raw/31e45f24657b1d86d6eaa5b338b3fc961b30b272/quote.json";
+const GIST_URL = "https://gist.githubusercontent.com/cmanna75/bb90b547698fcd9818913170f801f020/raw/f23c20e77daf007615721510c6f1f06e8664780c/quote.json";
 
 // MAIN
 let widget = await createWidget();
